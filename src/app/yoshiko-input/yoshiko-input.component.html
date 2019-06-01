@@ -1,0 +1,16 @@
+<div [ngClass]="{'input--focused': isFocused, 'input--filled': !!value}"
+     class="input">
+  <input class="input__field input__field--yoshiko"
+         type="text"
+         [id]="id"
+         [value]="value"
+         (input)="onInputChange($event.target.value)"
+         (focus)="onFocus()"
+         (blur)="onBlur()" />
+
+  <label class="input__label input__label--yoshiko"
+         [for]="id">
+    <span class="input__label-content input__label-content--yoshiko"
+          [attr.data-content]="label">{{label}}</span>
+  </label>
+</div>

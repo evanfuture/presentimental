@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "extends": [
+    "stylelint-config-idiomatic-order"
+  ],
+  "rules": {
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["/^app-/", "/^rch-/", "/^rcd-/", "/^next-/"] }],
+    "value-list-comma-newline-after": null,
+    "declaration-colon-newline-after": null
+  }
+}

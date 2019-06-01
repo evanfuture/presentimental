@@ -1,0 +1,47 @@
+.modalBase {
+  &__mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+  }
+
+  &__wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__container {
+    width: 500px;
+    padding: 20px 30px;
+    margin: 0px auto;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    color: #777;
+    font-size: 24px;
+    transition: all 0.3s ease;
+  }
+
+  &__body {
+    margin: 20px 0;
+  }
+
+  &-enter {
+    opacity: 0;
+  }
+
+  &-leave-active {
+    opacity: 0;
+  }
+
+  &-enter &__container,
+  &-leave-active &__container {
+    transform: scale(1.1);
+  }
+}

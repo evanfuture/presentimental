@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "beautify.language": {
+    "html": ["html"],
+    "css": [],
+    "js": []
+  },
+  "html.format.wrapAttributes": "force-aligned",
+  "html.autoClosingTags": false,
+  "prettier.stylelintIntegration": true,
+  "prettier.tslintIntegration": true
+}
