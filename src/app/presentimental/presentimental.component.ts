@@ -14,9 +14,6 @@ import {
   debounceTime,
   distinctUntilChanged,
   takeUntil,
-  delay,
-  debounce,
-  tap,
 } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
@@ -76,9 +73,11 @@ export class PresentimentalComponent
         if (!id) {
           return '';
         }
-        return this.sanitizer.bypassSecurityTrustResourceUrl(
+        const sanitisedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
         );
+        console.log(sanitisedUrl);
+        return sanitisedUrl;
       }),
     );
   }
@@ -103,9 +102,6 @@ export class PresentimentalComponent
               225,
             ),
           };
-        }),
-        tap(val => {
-          console.log(val);
         }),
         distinctUntilChanged(),
         takeUntil(this.unsubscribe),
