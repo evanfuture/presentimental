@@ -36,17 +36,18 @@
   </div>
 
   <div class="event">
-    <img src="/assets/netcentric_logo.svg"
+    <img *ngIf="showLogo"
+         [src]="conferenceLogoSrc"
          alt="Netcentric">
 
-    <div class="event__title">Frontend Talks</div>
+    <div class="event__title">{{ conferenceTitle }}</div>
 
     <div class="event__date">{{ today }}</div>
 
     <div class="event__edit"
          (click)="onEditClick($event)">
       <div class="label">Edit</div>
-      <img src="./assets/netcentric_icon.png"
+      <img src="/assets/netcentric_icon.png"
            alt="Edit Content" />
     </div>
   </div>
@@ -57,6 +58,17 @@
       <form [formGroup]="formGroup"
             (ngSubmit)="closeModal(true)"
             autocomplete="off">
+        <input id="showLogo"
+               type="checkbox"
+               formControlName="showLogo" />
+        <label for="showLogo">
+          Show Logo
+        </label>
+
+        <app-yoshiko-input label="Conference/Series Title"
+                           formControlName="conferenceTitle">
+        </app-yoshiko-input>
+
         <app-yoshiko-input label="Talk Title"
                            formControlName="talkTitle">
         </app-yoshiko-input>

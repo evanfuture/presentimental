@@ -38,12 +38,21 @@ export class PresentimentalComponent
   showEditModal = false;
   webcamHeight = 0;
   showWebcamSwitch = false;
+  conferenceLogoSrc: any = '/assets/netcentric_logo.svg';
   formGroup: FormGroup = this.fb.group({
+    showLogo: [true],
+    conferenceTitle: [''],
     talkTitle: [''],
     speakerName: [''],
     slidesId: [''],
   });
 
+  get showLogo(): boolean {
+    return this.formGroup.controls.showLogo.value;
+  }
+  get conferenceTitle(): string {
+    return this.formGroup.controls.conferenceTitle.value;
+  }
   get talkTitle(): string {
     return this.formGroup.controls.talkTitle.value;
   }
@@ -68,7 +77,7 @@ export class PresentimentalComponent
           return '';
         }
         return this.sanitizer.bypassSecurityTrustResourceUrl(
-          `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000`,
+          `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
         );
       }),
     );
