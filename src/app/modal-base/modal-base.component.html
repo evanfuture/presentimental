@@ -2,6 +2,10 @@
   <div class="modalBase__wrapper">
     <div class="modalBase__container"
          #container>
+      <div class="modalBase__header">
+        <ng-content select=".modal-header"></ng-content>
+      </div>
+
       <div class="modalBase__body">
         <ng-content select=".modal-body"></ng-content>
       </div>

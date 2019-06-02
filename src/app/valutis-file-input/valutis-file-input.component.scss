@@ -1,0 +1,46 @@
+.inputfile {
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+}
+
+.inputfile + label {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 80%;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label svg {
+  width: 1em;
+  height: 1em;
+  margin-top: -0.25em;
+  margin-right: 0.25em;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
+.inputfile-1 + label {
+  background-color: #331c93;
+  color: #f1e5e6;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+  background-color: #513e9e;
+}

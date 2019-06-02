@@ -6,12 +6,14 @@ import { ModalBaseComponent } from '../modal-base/modal-base.component';
 import { PresentimentalRoutingModule } from './presentimental-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WebcamModule } from 'ngx-webcam';
+import { ValutisFileInputComponent } from '../valutis-file-input/valutis-file-input.component';
 
 @NgModule({
   declarations: [
     PresentimentalComponent,
     YoshikoInputComponent,
     ModalBaseComponent,
+    ValutisFileInputComponent,
   ],
   imports: [
     CommonModule,

@@ -38,6 +38,7 @@ export class PresentimentalComponent
   conferenceLogoSrc: any = '/assets/netcentric_logo.svg';
   formGroup: FormGroup = this.fb.group({
     showLogo: [true],
+    conferenceLogo: [null],
     conferenceTitle: [''],
     talkTitle: [''],
     speakerName: [''],
@@ -67,6 +68,9 @@ export class PresentimentalComponent
   @ViewChild('presenterName', { static: false }) presenterName: ElementRef;
 
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) {
+    this.formGroup.controls.conferenceLogo.valueChanges.subscribe(c => {
+      this.conferenceLogoSrc = c;
+    });
     this.slidesUrl$ = this.formGroup.controls.slidesId.valueChanges.pipe(
       startWith(this.formGroup.controls.slidesId.value),
       map(id => {

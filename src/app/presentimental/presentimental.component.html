@@ -56,30 +56,51 @@
 
   <app-modal-base *ngIf="showEditModal"
                   (modalClose)="closeModal(false)">
+    <div class="modal-header">
+      <h2>Edit Presentation Details</h2>
+    </div>
     <div class="modal-body">
       <form [formGroup]="formGroup"
             (ngSubmit)="closeModal(true)"
             autocomplete="off">
-        <input id="showLogo"
-               type="checkbox"
-               formControlName="showLogo" />
-        <label for="showLogo">
-          Show Logo
-        </label>
 
         <app-yoshiko-input label="Conference/Series Title"
+                           id="conferenceTitle"
+                           name="conferenceTitle"
                            formControlName="conferenceTitle">
         </app-yoshiko-input>
 
+        <p class="modal-label">Conference/Series Logo</p>
+        <div class="modal-section">
+          <input id="showLogo"
+                 type="checkbox"
+                 formControlName="showLogo" />
+          <label class="modal-label"
+                 for="showLogo">
+            Show Logo
+          </label>
+          <app-valutis-file-input [placeholder]="'Choose a file&hellip;'"
+                                  [id]="'conferenceLogo'"
+                                  [name]="'conferenceLogo'"
+                                  formControlName="conferenceLogo">
+          </app-valutis-file-input>
+        </div>
+
         <app-yoshiko-input label="Talk Title"
+                           id="talkTitle"
+                           name="talkTitle"
                            formControlName="talkTitle">
         </app-yoshiko-input>
 
         <app-yoshiko-input label="Speaker Name"
+                           id="speakerName"
+                           name="speakerName"
                            formControlName="speakerName">
         </app-yoshiko-input>
 
         <app-yoshiko-input label="Slides Id"
+                           id="slidesId"
+                           name="slidesId"
                            formControlName="slidesId">
         </app-yoshiko-input>
       </form>
