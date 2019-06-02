@@ -1,27 +1,22 @@
-# Presentimental
+Presentimental
+======================
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+[Presentimental](https://presentimental.netlify.com/) is a simple app that combines an inline Google Slide deck with a webcam view, so you can make online presentations without losing the human factor.
 
-## Development server
+[![Presentimental demo](https://raw.githubusercontent.com/evanfuture/presentimental/master/github/presentimental.png)](https://presentimental.netlify.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## How To Use
 
-## Code scaffolding
+Since there is no back-end required, you can just open our [demo site](https://presentimental.netlify.com/) and use that.  Alternately, you can clone this repo, `npm install`, and `npm start` to run a local, offline version at `http://localhost:4200/`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Contribution
 
-## Build
+If you have ideas or use-cases, please consider opening Issues or making pull requests, we'd love to hear from you.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Credits
 
-## Running unit tests
+This software uses the following open source packages:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- [Angular](http://angular.io/)
+- [Day.js](https://github.com/iamkun/dayjs)
+- [ngx-webcam](https://github.com/basst314/ngx-webcam)
