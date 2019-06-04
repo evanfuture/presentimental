@@ -35,12 +35,12 @@
 }
 
 .inputfile-1 + label {
-  background-color: #331c93;
-  color: #f1e5e6;
+  background-color: var(--presentimental-primary-color);
+  color: var(--presentimental-primary-text-color);
 }
 
 .inputfile-1:focus + label,
 .inputfile-1.has-focus + label,
 .inputfile-1 + label:hover {
-  background-color: #513e9e;
+  background-color: var(--presentimental-primary-color);
 }

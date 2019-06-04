@@ -56,7 +56,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "presentimental:build"
+            "browserTarget": "presentimental:build",
+            "port": 4242
           },
           "configurations": {
             "production": {

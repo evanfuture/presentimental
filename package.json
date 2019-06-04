@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
+    "chroma-js": "^2.0.3",
     "dayjs": "^1.8.14",
     "ngx-webcam": "^0.2.2",
     "rxjs": "^6.4.0",

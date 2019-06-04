@@ -32,7 +32,7 @@
       &:focus + &,
       .input--filled &,
       .input--focused & {
-        border-color: #a3d39c;
+        border-color: var(--presentimental-primary-color);
         background-color: transparent;
       }
     }
@@ -86,7 +86,7 @@
           width: 100%;
           height: 100%;
           padding: 0.25em 0;
-          color: #a3d39c;
+          color: var(--presentimental-offset-color);
           content: attr(data-content);
           font-size: 0.85em;
           font-weight: 800;

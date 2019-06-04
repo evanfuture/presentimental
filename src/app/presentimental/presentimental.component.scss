@@ -1,3 +1,10 @@
+:host {
+  --presentimental-primary-color: blue;
+  --presentimental-secondary-color: #5831ac;
+  --presentimental-offset-color: #8b57a0;
+  --presentimental-primary-text-color: rgba(255, 255, 255, 0.8);
+}
+
 a {
   color: inherit;
 }
@@ -11,11 +18,11 @@ a {
   padding: 20px;
   background-image: radial-gradient(
     farthest-corner at calc(100% - 20px - 200px) calc(20px + 150px),
-    #8b57a0 0%,
-    #5831ac 20%,
-    #331c93 90%
+    var(--presentimental-offset-color) 0%,
+    var(--presentimental-secondary-color) 20%,
+    var(--presentimental-primary-color) 90%
   );
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--presentimental-primary-text-color);
   font-family: 'Open Sans', sans-serif;
   font-size: 28px;
   grid-gap: 20px 20px;
@@ -65,8 +72,8 @@ a {
         top: 50%;
         width: 40px;
         height: 6px;
-        border-top: 2px solid rgba(255, 255, 255, 0.8);
-        border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+        border-top: 2px solid var(--presentimental-primary-text-color);
+        border-bottom: 2px solid var(--presentimental-primary-text-color);
         content: '';
         transform: translateY(-50%);
       }
@@ -186,9 +193,9 @@ a {
   display: inline-block;
   width: 100%;
   padding: 25px 80px;
-  border: 3px solid #331c93;
-  background-color: #fff;
-  color: #331c93;
+  border: 3px solid var(--presentimental-primary-color);
+  background-color: var(--presentimental-primary-text-color);
+  color: var(--presentimental-primary-color);
   cursor: pointer;
   letter-spacing: 1px;
   outline: none;
@@ -197,7 +204,7 @@ a {
 
   &:hover,
   &:active {
-    background-color: #331c93;
-    color: #fff;
+    background-color: var(--presentimental-primary-color);
+    color: var(--presentimental-primary-text-color);
   }
 }
