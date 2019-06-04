@@ -18,6 +18,8 @@ import {
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ThemingService } from './services/theming.service';
+import { chroma } from 'chroma-js';
 
 dayjs.extend(advancedFormat);
 
@@ -43,6 +45,7 @@ export class PresentimentalComponent
     talkTitle: [''],
     speakerName: [''],
     slidesId: [''],
+    mainColor: ['#331c93'],
   });
 
   get showLogo(): boolean {
@@ -60,6 +63,9 @@ export class PresentimentalComponent
   get slidesId(): string {
     return this.formGroup.controls.slidesId.value;
   }
+  get mainColor(): string {
+    return this.formGroup.controls.mainColor.value;
+  }
   get today(): string {
     return dayjs().format('MMMM Do, YYYY');
   }
@@ -67,22 +73,31 @@ export class PresentimentalComponent
   @ViewChild('presenterArea', { static: false }) presenterArea: ElementRef;
   @ViewChild('presenterName', { static: false }) presenterName: ElementRef;
 
-  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) {
-    this.formGroup.controls.conferenceLogo.valueChanges.subscribe(c => {
-      this.conferenceLogoSrc = c;
-    });
+  constructor(
+    private fb: FormBuilder,
+    private sanitizer: DomSanitizer,
+    private host: ElementRef,
+    private themingService: ThemingService,
+  ) {
+    this.formGroup.controls.conferenceLogo.valueChanges.subscribe(
+      conferenceLogoSrc => {
+        this.conferenceLogoSrc = conferenceLogoSrc;
+      },
+    );
+    this.formGroup.controls.mainColor.valueChanges
+      .pipe(startWith(this.formGroup.controls.mainColor.value))
+      .subscribe(mainColor => {
+        this.themingService.setMainColor(this.host, mainColor);
+      });
     this.slidesUrl$ = this.formGroup.controls.slidesId.valueChanges.pipe(
       startWith(this.formGroup.controls.slidesId.value),
-      map(id => {
-        if (!id) {
-          return '';
-        }
-        const sanitisedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
-        );
-        console.log(sanitisedUrl);
-        return sanitisedUrl;
-      }),
+      map(id =>
+        id
+          ? this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
+            )
+          : '',
+      ),
     );
   }
 
