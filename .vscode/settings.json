@@ -6,7 +6,5 @@
     "js": []
   },
   "html.format.wrapAttributes": "force-aligned",
-  "html.autoClosingTags": false,
-  "prettier.stylelintIntegration": true,
-  "prettier.tslintIntegration": true
+  "html.autoClosingTags": false
 }
