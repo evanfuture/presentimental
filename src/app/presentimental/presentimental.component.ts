@@ -70,8 +70,8 @@ export class PresentimentalComponent
     return dayjs().format('MMMM Do, YYYY');
   }
 
-  @ViewChild('presenterArea', { static: false }) presenterArea: ElementRef;
-  @ViewChild('presenterName', { static: false }) presenterName: ElementRef;
+  @ViewChild('presenterArea') presenterArea: ElementRef;
+  @ViewChild('presenterName') presenterName: ElementRef;
 
   constructor(
     private fb: FormBuilder,
