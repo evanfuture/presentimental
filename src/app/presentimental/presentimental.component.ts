@@ -4,7 +4,7 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  OnDestroy,
+  OnDestroy
 } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, fromEvent, Subject } from 'rxjs';
@@ -14,19 +14,20 @@ import {
   debounceTime,
   distinctUntilChanged,
   takeUntil,
+  take
 } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ThemingService } from './services/theming.service';
-import { chroma } from 'chroma-js';
+import { PreferencesFacade } from './preferences/preferences.facade';
 
 dayjs.extend(advancedFormat);
 
 @Component({
   selector: 'app-presentimental',
   templateUrl: './presentimental.component.html',
-  styleUrls: ['./presentimental.component.scss'],
+  styleUrls: ['./presentimental.component.scss']
 })
 export class PresentimentalComponent
   implements OnInit, AfterViewInit, OnDestroy {
@@ -45,7 +46,7 @@ export class PresentimentalComponent
     talkTitle: [''],
     speakerName: [''],
     slidesId: [''],
-    mainColor: ['#331c93'],
+    mainColor: ['#331c93']
   });
 
   get showLogo(): boolean {
@@ -78,11 +79,17 @@ export class PresentimentalComponent
     private sanitizer: DomSanitizer,
     private host: ElementRef,
     private themingService: ThemingService,
+    private preferencesFacade: PreferencesFacade
   ) {
+    this.formGroup.valueChanges.subscribe(value => {
+      this.preferencesFacade.updatePreferences({
+        ...value
+      });
+    });
     this.formGroup.controls.conferenceLogo.valueChanges.subscribe(
       conferenceLogoSrc => {
         this.conferenceLogoSrc = conferenceLogoSrc;
-      },
+      }
     );
     this.formGroup.controls.mainColor.valueChanges
       .pipe(startWith(this.formGroup.controls.mainColor.value))
@@ -94,14 +101,18 @@ export class PresentimentalComponent
       map(id =>
         id
           ? this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
+              `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`
             )
-          : '',
-      ),
+          : ''
+      )
     );
   }
 
   ngOnInit(): void {
+    this.preferencesFacade.preferences$.subscribe(preferences => {
+      this.formGroup.patchValue(preferences, { emitEvent: false });
+    });
+
     if (!this.talkTitle && !this.speakerName && !this.slidesId) {
       this.showEditModal = true;
     }
@@ -118,12 +129,12 @@ export class PresentimentalComponent
             height: Math.max(
               this.presenterArea.nativeElement.offsetHeight -
                 this.presenterName.nativeElement.offsetHeight,
-              225,
-            ),
+              225
+            )
           };
         }),
         distinctUntilChanged(),
-        takeUntil(this.unsubscribe),
+        takeUntil(this.unsubscribe)
       );
     });
   }

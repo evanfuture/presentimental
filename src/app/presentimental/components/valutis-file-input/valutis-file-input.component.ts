@@ -3,7 +3,7 @@ import {
   HostListener,
   ElementRef,
   forwardRef,
-  Input,
+  Input
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,9 +16,9 @@ import { DomSanitizer } from '@angular/platform-browser';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ValutisFileInputComponent),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class ValutisFileInputComponent implements ControlValueAccessor {
   @Input()
@@ -28,12 +28,12 @@ export class ValutisFileInputComponent implements ControlValueAccessor {
   @Input()
   placeholder = '';
 
-  onChange: Function;
+  onChange: (prop: any) => any;
   fileName = '';
 
   constructor(
     private host: ElementRef<HTMLInputElement>,
-    private sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer
   ) {}
 
   @HostListener('change', ['$event.target.files'])
@@ -43,7 +43,7 @@ export class ValutisFileInputComponent implements ControlValueAccessor {
 
     reader.onload = (e: any) => {
       const src = this.sanitizer.bypassSecurityTrustResourceUrl(
-        e.target.result,
+        e.target.result
       );
       this.onChange(src);
       this.fileName = file.name;
@@ -58,9 +58,9 @@ export class ValutisFileInputComponent implements ControlValueAccessor {
     this.fileName = '';
   }
 
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: () => any) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: Function) {}
+  registerOnTouched(fn: () => any) {}
 }

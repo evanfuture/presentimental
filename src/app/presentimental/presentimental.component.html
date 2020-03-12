@@ -1,36 +1,39 @@
 <div class="presentation">
   <div class="slides">
-    <iframe *ngIf="slidesUrl$ | async as slidesUrl; else emptySlides"
-            [src]="slidesUrl"
-            frameborder="0"
-            width="100%"
-            height="100%"
-            allowfullscreen="true"
-            mozallowfullscreen="true"
-            webkitallowfullscreen="true">
+    <iframe
+      *ngIf="slidesUrl$ | async as slidesUrl; else emptySlides"
+      [src]="slidesUrl"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      allowfullscreen="true"
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    >
     </iframe>
 
     <ng-template #emptySlides>
       <div class="slides placeholder">
-        Find your slides ID through <a href="https://drive.google.com/"
-           target="_blank">Google Drive</a>.
-
+        Find your slides ID through
+        <a href="https://drive.google.com/" target="_blank">Google Drive</a>.
         You will also need to PUBLISH your slides before this works.
       </div>
     </ng-template>
   </div>
 
-  <div class="presenter"
-       #presenterArea>
+  <div class="presenter" #presenterArea>
     <ng-container *ngIf="webcamSize$ | async as webcamSize">
-      <webcam class="webcam"
-              [width]="webcamSize.width"
-              [height]="webcamSize.height"
-              [allowCameraSwitch]="showWebcamSwitch"
-              (imageClick)="toggleWebcamSwitch()"></webcam>
+      <webcam
+        class="webcam"
+        [width]="webcamSize.width"
+        [height]="webcamSize.height"
+        [allowCameraSwitch]="showWebcamSwitch"
+        (imageClick)="toggleWebcamSwitch()"
+      ></webcam>
     </ng-container>
-    <h3 class="presenter__name"
-        #presenterName><span>{{ speakerName }}</span></h3>
+    <h3 class="presenter__name" #presenterName>
+      <span>{{ speakerName }}</span>
+    </h3>
   </div>
 
   <div class="details">
@@ -38,83 +41,83 @@
   </div>
 
   <div class="event">
-    <img *ngIf="showLogo"
-         [src]="conferenceLogoSrc"
-         alt="Netcentric">
+    <img *ngIf="showLogo" [src]="conferenceLogoSrc" alt="Netcentric" />
 
     <div class="event__title">{{ conferenceTitle }}</div>
 
     <div class="event__date">{{ today }}</div>
 
-    <div class="event__edit"
-         (click)="onEditClick($event)">
+    <div class="event__edit" (click)="onEditClick($event)">
       <div class="label">Edit</div>
-      <img src="/assets/netcentric_icon.png"
-           alt="Edit Content" />
+      <img src="/assets/netcentric_icon.png" alt="Edit Content" />
     </div>
   </div>
 
-  <app-modal-base *ngIf="showEditModal"
-                  (modalClose)="closeModal(false)">
+  <app-modal-base *ngIf="showEditModal" (modalClose)="closeModal(false)">
     <div class="modal-header">
       <h2>Edit Presentation Details</h2>
     </div>
     <div class="modal-body">
-      <form [formGroup]="formGroup"
-            (ngSubmit)="closeModal(true)"
-            autocomplete="off">
-
-        <app-yoshiko-input label="Conference/Series Title"
-                           id="conferenceTitle"
-                           name="conferenceTitle"
-                           formControlName="conferenceTitle">
+      <form
+        [formGroup]="formGroup"
+        (ngSubmit)="closeModal(true)"
+        autocomplete="off"
+      >
+        <app-yoshiko-input
+          label="Conference/Series Title"
+          id="conferenceTitle"
+          name="conferenceTitle"
+          formControlName="conferenceTitle"
+        >
         </app-yoshiko-input>
 
         <p class="modal-label">Conference/Series Logo</p>
         <div class="modal-section">
-          <input id="showLogo"
-                 type="checkbox"
-                 formControlName="showLogo" />
-          <label class="modal-label"
-                 for="showLogo">
+          <input id="showLogo" type="checkbox" formControlName="showLogo" />
+          <label class="modal-label" for="showLogo">
             Show Logo
           </label>
-          <app-valutis-file-input [placeholder]="'Choose a file&hellip;'"
-                                  [id]="'conferenceLogo'"
-                                  [name]="'conferenceLogo'"
-                                  formControlName="conferenceLogo">
+          <app-valutis-file-input
+            [placeholder]="'Choose a file&hellip;'"
+            [id]="'conferenceLogo'"
+            [name]="'conferenceLogo'"
+            formControlName="conferenceLogo"
+          >
           </app-valutis-file-input>
         </div>
 
-        <label class="modal-label"
-               for="mainColor">
+        <label class="modal-label" for="mainColor">
           Edit Main Color
         </label>
-        <input type="color"
-               formControlName="mainColor" />
+        <input type="color" formControlName="mainColor" />
 
-        <app-yoshiko-input label="Talk Title"
-                           id="talkTitle"
-                           name="talkTitle"
-                           formControlName="talkTitle">
+        <app-yoshiko-input
+          label="Talk Title"
+          id="talkTitle"
+          name="talkTitle"
+          formControlName="talkTitle"
+        >
         </app-yoshiko-input>
 
-        <app-yoshiko-input label="Speaker Name"
-                           id="speakerName"
-                           name="speakerName"
-                           formControlName="speakerName">
+        <app-yoshiko-input
+          label="Speaker Name"
+          id="speakerName"
+          name="speakerName"
+          formControlName="speakerName"
+        >
         </app-yoshiko-input>
 
-        <app-yoshiko-input label="Slides Id"
-                           id="slidesId"
-                           name="slidesId"
-                           formControlName="slidesId">
+        <app-yoshiko-input
+          label="Slides Id"
+          id="slidesId"
+          name="slidesId"
+          formControlName="slidesId"
+        >
         </app-yoshiko-input>
       </form>
     </div>
     <div class="modal-footer">
-      <button class="modal-button"
-              (click)="closeModal(true)">
+      <button class="modal-button" (click)="closeModal(true)">
         Apply
       </button>
     </div>
