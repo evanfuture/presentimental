@@ -53,5 +53,16 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 120,
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "semi": true,
+    "trailingComma": "all",
+    "tslintIntegration": true,
+    "stylelintIntegration": true
   }
 }

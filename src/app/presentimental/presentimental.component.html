@@ -15,8 +15,8 @@
     <ng-template #emptySlides>
       <div class="slides placeholder">
         Find your slides ID through
-        <a href="https://drive.google.com/" target="_blank">Google Drive</a>.
-        You will also need to PUBLISH your slides before this works.
+        <a href="https://drive.google.com/" target="_blank">Google Drive</a>. You will also need to PUBLISH your slides
+        before this works.
       </div>
     </ng-template>
   </div>
@@ -45,7 +45,7 @@
 
     <div class="event__title">{{ conferenceTitle }}</div>
 
-    <div class="event__date">{{ today }}</div>
+    <div *ngIf="showDate" class="event__date">{{ today }}</div>
 
     <div class="event__edit" (click)="onEditClick($event)">
       <div class="label">Edit</div>
@@ -58,11 +58,7 @@
       <h2>Edit Presentation Details</h2>
     </div>
     <div class="modal-body">
-      <form
-        [formGroup]="formGroup"
-        (ngSubmit)="closeModal(true)"
-        autocomplete="off"
-      >
+      <form [formGroup]="formGroup" (ngSubmit)="closeModal(true)" autocomplete="off">
         <app-yoshiko-input
           label="Conference/Series Title"
           id="conferenceTitle"
@@ -86,33 +82,34 @@
           </app-valutis-file-input>
         </div>
 
-        <label class="modal-label" for="mainColor">
-          Edit Main Color
-        </label>
-        <input type="color" formControlName="mainColor" />
+        <div class="modal-section">
+          <label class="modal-label" for="mainColor">
+            Edit Main Color
+          </label>
+          <input type="color" formControlName="mainColor" />
+        </div>
 
-        <app-yoshiko-input
-          label="Talk Title"
-          id="talkTitle"
-          name="talkTitle"
-          formControlName="talkTitle"
-        >
+        <div class="modal-section">
+          <label class="modal-label" for="withGradient">
+            Show Background Gradient
+          </label>
+          <input id="withGradient" type="checkbox" formControlName="withGradient" />
+        </div>
+
+        <div class="modal-section">
+          <label class="modal-label" for="showDate">
+            Show Date
+          </label>
+          <input id="showDate" type="checkbox" formControlName="showDate" />
+        </div>
+
+        <app-yoshiko-input label="Talk Title" id="talkTitle" name="talkTitle" formControlName="talkTitle">
         </app-yoshiko-input>
 
-        <app-yoshiko-input
-          label="Speaker Name"
-          id="speakerName"
-          name="speakerName"
-          formControlName="speakerName"
-        >
+        <app-yoshiko-input label="Speaker Name" id="speakerName" name="speakerName" formControlName="speakerName">
         </app-yoshiko-input>
 
-        <app-yoshiko-input
-          label="Slides Id"
-          id="slidesId"
-          name="slidesId"
-          formControlName="slidesId"
-        >
+        <app-yoshiko-input label="Slides Id" id="slidesId" name="slidesId" formControlName="slidesId">
         </app-yoshiko-input>
       </form>
     </div>
