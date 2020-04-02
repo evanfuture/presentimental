@@ -11,6 +11,8 @@ export interface State {
   speakerName: string;
   slidesId: string;
   mainColor: string;
+  withGradient: boolean;
+  showDate: boolean;
 }
 
 export interface PreferencesPartialState {
@@ -24,7 +26,9 @@ export const initialState: State = {
   talkTitle: '',
   speakerName: '',
   slidesId: '',
-  mainColor: '#331c93'
+  mainColor: '#331c93',
+  withGradient: true,
+  showDate: true,
 };
 
 const preferencesReducer = createReducer(
@@ -33,9 +37,9 @@ const preferencesReducer = createReducer(
   on(PreferencesActions.updatePreferences, (state, { preferences }) => {
     return {
       ...state,
-      ...preferences
+      ...preferences,
     };
-  })
+  }),
 );
 
 export function reducer(state: State | undefined, action: Action) {
