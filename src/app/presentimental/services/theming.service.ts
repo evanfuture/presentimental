@@ -6,28 +6,24 @@ import chroma from 'chroma-js';
 })
 export class ThemingService {
   constructor() {}
-  setMainColor(hostElement: ElementRef, color: string) {
-    hostElement.nativeElement.style.setProperty(
-      `--presentimental-primary-color`,
-      color,
-    );
-    hostElement.nativeElement.style.setProperty(
-      `--presentimental-secondary-color`,
-      chroma(color)
-        .brighten(1.5)
-        .hex(),
-    );
-    hostElement.nativeElement.style.setProperty(
-      `--presentimental-offset-color`,
-      chroma(color)
-        .set('lab.a', '*2.22')
-        .hex(),
-    );
+  setMainColor(hostElement: ElementRef, color: string, withGradient: boolean) {
+    const secondaryColor = withGradient
+      ? chroma(color)
+          .brighten(1.5)
+          .hex()
+      : color;
+    const offsetColor = withGradient
+      ? chroma(color)
+          .set('lab.a', '*2.22')
+          .hex()
+      : color;
+
     const [luminosity] = chroma(color).lch();
-    const c = chroma({ h: 0, s: 0, l: luminosity < 50 ? 1 : 0 }).hex('rgba');
-    hostElement.nativeElement.style.setProperty(
-      `--presentimental-primary-text-color`,
-      c,
-    );
+    const textColor = chroma({ h: 0, s: 0, l: luminosity < 50 ? 1 : 0 }).hex('rgba');
+
+    hostElement.nativeElement.style.setProperty(`--presentimental-primary-color`, color);
+    hostElement.nativeElement.style.setProperty(`--presentimental-secondary-color`, secondaryColor);
+    hostElement.nativeElement.style.setProperty(`--presentimental-offset-color`, offsetColor);
+    hostElement.nativeElement.style.setProperty(`--presentimental-primary-text-color`, textColor);
   }
 }

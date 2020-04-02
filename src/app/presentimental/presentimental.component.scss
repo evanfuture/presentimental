@@ -23,7 +23,7 @@ a {
     var(--presentimental-primary-color) 90%
   );
   color: var(--presentimental-primary-text-color);
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 28px;
   grid-gap: 20px 20px;
   grid-template-rows: 60% auto auto;
@@ -62,32 +62,6 @@ a {
     margin: 0;
     font-size: 1em;
     font-weight: 100;
-
-    span {
-      position: relative;
-
-      &::before,
-      &::after {
-        position: absolute;
-        top: 50%;
-        width: 40px;
-        height: 6px;
-        border-top: 2px solid var(--presentimental-primary-text-color);
-        border-bottom: 2px solid var(--presentimental-primary-text-color);
-        content: '';
-        transform: translateY(-50%);
-      }
-
-      &::before {
-        right: 100%;
-        margin-right: 5px;
-      }
-
-      &::after {
-        left: 100%;
-        margin-left: 5px;
-      }
-    }
   }
 
   @media (min-width: 1120px) {

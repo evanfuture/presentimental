@@ -1,21 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable, fromEvent, Subject } from 'rxjs';
-import {
-  map,
-  startWith,
-  debounceTime,
-  distinctUntilChanged,
-  takeUntil,
-  take
-} from 'rxjs/operators';
+import { Observable, fromEvent, Subject, combineLatest } from 'rxjs';
+import { map, startWith, debounceTime, distinctUntilChanged, takeUntil, take } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -27,10 +13,9 @@ dayjs.extend(advancedFormat);
 @Component({
   selector: 'app-presentimental',
   templateUrl: './presentimental.component.html',
-  styleUrls: ['./presentimental.component.scss']
+  styleUrls: ['./presentimental.component.scss'],
 })
-export class PresentimentalComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class PresentimentalComponent implements OnInit, AfterViewInit, OnDestroy {
   slidesUrl$: Observable<SafeResourceUrl>;
   webcamSize$: Observable<{ width: number; height: number }>;
   unsubscribe: Subject<void> = new Subject();
@@ -46,7 +31,9 @@ export class PresentimentalComponent
     talkTitle: [''],
     speakerName: [''],
     slidesId: [''],
-    mainColor: ['#331c93']
+    mainColor: ['#331c93'],
+    withGradient: [true],
+    showDate: [true],
   });
 
   get showLogo(): boolean {
@@ -70,6 +57,12 @@ export class PresentimentalComponent
   get today(): string {
     return dayjs().format('MMMM Do, YYYY');
   }
+  get withGradient(): string {
+    return this.formGroup.controls.withGradient.value;
+  }
+  get showDate(): string {
+    return this.formGroup.controls.showDate.value;
+  }
 
   @ViewChild('presenterArea', { static: false }) presenterArea: ElementRef;
   @ViewChild('presenterName', { static: false }) presenterName: ElementRef;
@@ -79,32 +72,31 @@ export class PresentimentalComponent
     private sanitizer: DomSanitizer,
     private host: ElementRef,
     private themingService: ThemingService,
-    private preferencesFacade: PreferencesFacade
+    private preferencesFacade: PreferencesFacade,
   ) {
     this.formGroup.valueChanges.subscribe(value => {
       this.preferencesFacade.updatePreferences({
-        ...value
+        ...value,
       });
     });
-    this.formGroup.controls.conferenceLogo.valueChanges.subscribe(
-      conferenceLogoSrc => {
-        this.conferenceLogoSrc = conferenceLogoSrc;
-      }
-    );
-    this.formGroup.controls.mainColor.valueChanges
-      .pipe(startWith(this.formGroup.controls.mainColor.value))
-      .subscribe(mainColor => {
-        this.themingService.setMainColor(this.host, mainColor);
-      });
+    this.formGroup.controls.conferenceLogo.valueChanges.subscribe(conferenceLogoSrc => {
+      this.conferenceLogoSrc = conferenceLogoSrc;
+    });
+    combineLatest([
+      this.formGroup.controls.mainColor.valueChanges.pipe(startWith(this.formGroup.controls.mainColor.value)),
+      this.formGroup.controls.withGradient.valueChanges.pipe(startWith(this.formGroup.controls.withGradient.value)),
+    ]).subscribe(([mainColor, withGradient]) => {
+      this.themingService.setMainColor(this.host, mainColor, withGradient);
+    });
     this.slidesUrl$ = this.formGroup.controls.slidesId.valueChanges.pipe(
       startWith(this.formGroup.controls.slidesId.value),
       map(id =>
         id
           ? this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`
+              `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000&embedded=true`,
             )
-          : ''
-      )
+          : '',
+      ),
     );
   }
 
@@ -127,14 +119,13 @@ export class PresentimentalComponent
           return {
             width: Math.max(this.presenterArea.nativeElement.offsetWidth, 400),
             height: Math.max(
-              this.presenterArea.nativeElement.offsetHeight -
-                this.presenterName.nativeElement.offsetHeight,
-              225
-            )
+              this.presenterArea.nativeElement.offsetHeight - this.presenterName.nativeElement.offsetHeight,
+              225,
+            ),
           };
         }),
         distinctUntilChanged(),
-        takeUntil(this.unsubscribe)
+        takeUntil(this.unsubscribe),
       );
     });
   }
