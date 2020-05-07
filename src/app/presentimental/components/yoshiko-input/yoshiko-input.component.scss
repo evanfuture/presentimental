@@ -46,7 +46,7 @@
     font-size: 70.25%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-weight: bold;
+    font-weight: 600;
     -webkit-touch-callout: none;
     user-select: none;
 
@@ -89,7 +89,7 @@
           color: var(--presentimental-offset-color);
           content: attr(data-content);
           font-size: 0.85em;
-          font-weight: 800;
+          font-weight: 600;
           letter-spacing: 1px;
           text-transform: uppercase;
         }

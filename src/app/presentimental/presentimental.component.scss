@@ -23,7 +23,7 @@ a {
     var(--presentimental-primary-color) 90%
   );
   color: var(--presentimental-primary-text-color);
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 28px;
   grid-gap: 20px 20px;
   grid-template-rows: 60% auto auto;
@@ -61,7 +61,7 @@ a {
     width: 100%;
     margin: 0;
     font-size: 1em;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   @media (min-width: 1120px) {
@@ -83,7 +83,7 @@ a {
   &__title {
     margin: 0;
     font-size: 1.2em;
-    font-weight: 100;
+    font-weight: 300;
 
     @media (min-width: 1120px) {
       font-size: 1.4em;
@@ -102,7 +102,7 @@ a {
 
   &__title {
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 600;
 
     @media (min-width: 1120px) {
       font-size: 1.2em;
@@ -111,7 +111,7 @@ a {
 
   &__date {
     font-size: 0.6em;
-    font-weight: 100;
+    font-weight: 300;
 
     @media (min-width: 1120px) {
       font-size: 0.7em;
